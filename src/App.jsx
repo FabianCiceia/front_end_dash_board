@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
-import Prueba from './pages/prueba';  
+import Prueba from './pages/Prueba';  
 
 function App() {
   return (
