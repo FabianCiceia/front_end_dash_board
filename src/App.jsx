@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Prueba from './pages/Prueba';  
+import Maquina from './pages/Maquina';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/prueba" element={<Prueba/> } />
+            <Route path="/maquina/:id" element={<Maquina />} />
             {/* Agrega más rutas aquí */}
           </Routes>
         </Box>
