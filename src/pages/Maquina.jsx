@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import VoltageCurrentChart from '../components/VoltageCurrentChart';
 
 
 const Maquina = () => {
@@ -53,6 +54,7 @@ const Maquina = () => {
     return (
         <div style={{ padding: 24 }}>
             <h2>{machineData.nombre}</h2>
+            <VoltageCurrentChart machine={machineData.nombre} /> 
 
         </div>
     );
