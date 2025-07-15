@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const sampleData = [
@@ -31,9 +31,9 @@ const VoltageCurrentChart = ({ machine }) => {
       <LineChart data={sampleData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="time" />
-        {/* <YAxis yAxisId="left" label={{ value: 'Voltaje (V)', angle: -90, position: 'insideLeft' }} /> */}
-        {/* <YAxis yAxisId="right" orientation="right" label={{ value: 'Corriente (A)', angle: -90, position: 'insideRight' }} /> */}
-        {/* <Tooltip /> */}
+        <YAxis yAxisId="left" label={{ value: 'Voltaje (V)', angle: -90, position: 'insideLeft' }} />
+        <YAxis yAxisId="right" orientation="right" label={{ value: 'Corriente (A)', angle: -90, position: 'insideRight' }} />
+        <Tooltip />
         <Legend />
         <Line yAxisId="left" type="monotone" dataKey="voltage" stroke="#d22519ff" />
         <Line yAxisId="right" type="monotone" dataKey="current" stroke="#00d451ff" />
