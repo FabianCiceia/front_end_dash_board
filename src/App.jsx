@@ -9,8 +9,8 @@ import Maquina from './pages/Maquina';
 
 function App() {
   return (
+ 
     <Box sx={{ display: 'flex' }}>
-      {/* <Sidebar /> */}
       <Box sx={{ flexGrow: 1 }}>
         <Navbar />
         <Box sx={{ p: 3 }}>
