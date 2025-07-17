@@ -9,7 +9,8 @@ import Maquina from './pages/Maquina';
 
 function App() {
   return (
- 
+    // Enviar un mensaje por consola para verificar que el componente se ha cargado
+    console.log('App component loaded'),
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ flexGrow: 1 }}>
         <Navbar />
