@@ -33,6 +33,7 @@ const Maquina = () => {
     <div style={{ padding: 24 }}>
       <h2>Datos de {id}</h2>
       {machineData && (
+        console.log('Datos de la máquina:', machineData),
         <>
           <VoltajeChart data={machineData} />
           <CorrienteChart data={machineData} />
