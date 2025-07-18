@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Prueba from './pages/Prueba';  
 import Maquina from './pages/Maquina';
-
+import './styles/comun.css';
 function App() {
   return (
     // Enviar un mensaje por consola para verificar que el componente se ha cargado
