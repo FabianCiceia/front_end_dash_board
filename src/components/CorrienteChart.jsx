@@ -9,21 +9,21 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-const VoltajeChart = ({ data }) => {
+const CorrienteChart = ({ data }) => {
   return (
     <div style={{ marginBottom: 40 }}>
-      <h3>Voltaje</h3>
+      <h3>Corriente</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
           <XAxis dataKey="fecha" />
           <YAxis />
           <Tooltip />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-          <Line type="monotone" dataKey="voltaje" stroke="#8884d8" name="Voltaje" />
+          <Line type="monotone" dataKey="corriente" stroke="#82ca9d" name="Corriente" />
         </LineChart>
       </ResponsiveContainer>
     </div>
   );
 };
 
-export default VoltajeChart;
+export default CorrienteChart;

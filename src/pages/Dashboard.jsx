@@ -1,18 +1,17 @@
 import React from 'react';
 import '../styles/dashboard.css';
 import { useNavigate } from 'react-router-dom';
-
-const machines = [
-  { name: 'Bomba A', path: 'bomba-a' },
-  { name: 'Bomba B', path: 'bomba-b' },
-  { name: 'Bomba C', path: 'bomba-c' },
-];
+import useApi from '../hooks/useApi';
 
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const handleMachineClick = (path) => {
-    navigate(`/maquina/${path}`);
+  const { data: machines, loading, error } = useApi({
+    url: '/maquina'
+  });
+
+  const handleMachineClick = (maquina) => {
+    navigate(`/maquina/${maquina}`);
   };
 
   return (
@@ -20,14 +19,17 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <p>Bienvenido al panel. Selecciona una máquina para ver su información.</p>
 
+      {loading && <p>Cargando lista de máquinas...</p>}
+      {error && <p style={{ color: 'red' }}>Error al cargar las máquinas</p>}
+
       <div className="machine-list">
-        {machines.map((machine) => (
+        {machines && machines.map((maquina) => (
           <button
-            key={machine.path}
+            key={maquina}
             className="machine-item"
-            onClick={() => handleMachineClick(machine.path)}
+            onClick={() => handleMachineClick(maquina)}
           >
-            {machine.name}
+            {maquina}
           </button>
         ))}
       </div>
