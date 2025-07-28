@@ -12,21 +12,23 @@ import {
 const VoltageChart = ({ data }) => {
   if (!data || data.length === 0) return <p>No hay datos para mostrar.</p>;
 
-  // Calcular voltaje mínimo y máximo con margen de 10
-  const voltajes = data.map(d => parseFloat(d.voltaje));
-  const minV = Math.min(...voltajes) - 10;
-  const maxV = Math.max(...voltajes) + 10;
+  // Calcular min y max considerando las tres fases
+  const allVoltages = data.flatMap(d => [d.voltage_a, d.voltage_b, d.voltage_c]);
+  const minV = Math.min(...allVoltages) - 10;
+  const maxV = Math.max(...allVoltages) + 10;
 
   return (
     <div style={{ marginBottom: 40 }}>
-      <h3>Gráfica de Voltaje</h3>
+      <h3>Gráfica de Voltajes (Fase A, B y C)</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
-          <XAxis dataKey="fecha" />
+          <XAxis dataKey="time" />
           <YAxis domain={[minV, maxV]} />
           <Tooltip />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Line type="monotone" dataKey="voltaje" stroke="#8884d8" name="Voltaje" />
+          <Line type="monotone" dataKey="voltage_a" stroke="#ff7300" name="Fase A" />
+          <Line type="monotone" dataKey="voltage_b" stroke="#387908" name="Fase B" />
+          <Line type="monotone" dataKey="voltage_c" stroke="#8884d8" name="Fase C" />
         </LineChart>
       </ResponsiveContainer>
     </div>

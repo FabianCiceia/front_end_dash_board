@@ -7,29 +7,29 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const { data: machines, loading, error } = useApi({
-    url: '/maquina'
+    url: '/machines'
   });
 
-  const handleMachineClick = (maquina) => {
-    navigate(`/maquina/${maquina}`);
+  const handleMachineClick = (id) => {
+    navigate(`/machines/${id}`);
   };
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error al cargar las máquinas: {error.message}</p>;
 
   return (
     <div className="dashboard-container">
       <h1>Dashboard</h1>
       <p>Bienvenido al panel. Selecciona una máquina para ver su información.</p>
 
-      {loading && <p>Cargando lista de máquinas...</p>}
-      {error && <p style={{ color: 'red' }}>Error al cargar las máquinas</p>}
-
       <div className="machine-list">
         {machines && machines.map((maquina) => (
           <button
-            key={maquina}
+            key={maquina.id}
             className="machine-item"
-            onClick={() => handleMachineClick(maquina)}
+            onClick={() => handleMachineClick(maquina.id)}
           >
-            {maquina}
+            {maquina.name ? maquina.name : `Máquina #${maquina.id}`}
           </button>
         ))}
       </div>

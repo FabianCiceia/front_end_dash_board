@@ -8,7 +8,7 @@ const Maquina = () => {
   const { id } = useParams();
 
   const { data: machineData, loading, error } = useApi({
-    url: `/maquina/${id}`,
+    url: `/machines/${id}`,
     method: 'GET'
   });
 
@@ -29,16 +29,15 @@ const Maquina = () => {
     );
   }
 
+  if (!machineData) {
+    return <p>No se encontró información de la máquina.</p>;
+  }
+
   return (
     <div style={{ padding: 24 }}>
-      <h2>Datos de {id}</h2>
-      {machineData && (
-        console.log('Datos de la máquina:', machineData),
-        <>
-          <VoltajeChart data={machineData} />
-          <CorrienteChart data={machineData} />
-        </>
-      )}
+      <h2>Datos de {machineData.name ?? `Máquina #${id}`}</h2>
+      <VoltajeChart data={machineData.measurements} />
+      <CorrienteChart data={machineData.measurements} />
     </div>
   );
 };

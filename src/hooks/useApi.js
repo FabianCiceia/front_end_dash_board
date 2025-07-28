@@ -23,10 +23,10 @@ const useApi = ({
         url: `${API_BASE_URL}${url}`, // Construir la URL completa
         // Si el método es POST, PUT o PATCH, incluir el cuerpo de la solicitud
         data: body,
-        params: {
-          ...params,
-          api_key: API_KEY // 🔑 Agregar la clave como parámetro de consulta
-        },
+        // params: {
+        //   ...params,
+        //   api_key: API_KEY // 🔑 Agregar la clave como parámetro de consulta
+        // },
         headers: {
           ...headers
           // No usamos x-api-key si no es necesario

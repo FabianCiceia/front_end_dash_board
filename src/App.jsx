@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Prueba from './pages/Prueba';  
 import Maquina from './pages/Maquina';
+import Login from './pages/Login';
 import './styles/comun.css';
 function App() {
   return (
@@ -14,14 +15,15 @@ function App() {
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ flexGrow: 1 }}>
         <Navbar />
-        <Box sx={{ p: 3 }}>
+
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/prueba" element={<Prueba/> } />
-            <Route path="/maquina/:id" element={<Maquina />} />
+            <Route path="/machines/:id" element={<Maquina />} />
+            <Route path="/login" element={<Login />} />
             {/* Agrega más rutas aquí */}
           </Routes>
-        </Box>
+
       </Box>
     </Box>
   );
