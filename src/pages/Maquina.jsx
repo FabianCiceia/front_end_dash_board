@@ -1,43 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useApi from '../hooks/useApi';
 import VoltajeChart from '../components/VoltajeChart';
 import CorrienteChart from '../components/CorrienteChart';
+import socket from '../socket';
 
 const Maquina = () => {
   const { id } = useParams();
-
+  const [mediciones, setMediciones] = useState([]);
   const { data: machineData, loading, error } = useApi({
-    url: `/machines/${id}`,
-    method: 'GET'
+    url: `/machines/${id}`
   });
 
-  if (loading) {
-    return (
-      <div style={{ textAlign: 'center', marginTop: 50 }}>
-        <h2>Cargando datos de la máquina...</h2>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (machineData?.measurements) {
+      setMediciones(machineData.measurements);
+    }
+  }, [machineData]);
 
-  if (error) {
-    console.error('Error al cargar los datos de la máquina:', error);
-    return (
-      <h1 style={{ color: 'red', textAlign: 'center' }}>
-        Error al cargar los datos de la máquina.
-      </h1>
-    );
-  }
+  useEffect(() => {
+    socket.on('newMeasurement', (data) => {
+      if (data.machine_id === parseInt(id)) {
+        setMediciones((prev) => [data, ...prev]);
+      }
+    });
 
-  if (!machineData) {
-    return <p>No se encontró información de la máquina.</p>;
-  }
+    return () => socket.off('newMeasurement');
+  }, [id]);
+
+  if (loading) return <p>Cargando datos...</p>;
+  if (error) return <p>Error al cargar: {error.message}</p>;
+
+const chartData = mediciones.map((m) => ({
+  time: new Date(m.time).toLocaleTimeString(), // eje X
+  current: m.current,                          // eje Y para CorrienteChart
+  voltage_a: m.voltage_a,
+  voltage_b: m.voltage_b,
+  voltage_c: m.voltage_c
+}));
+
+  
 
   return (
     <div style={{ padding: 24 }}>
-      <h2>Datos de {machineData.name ?? `Máquina #${id}`}</h2>
-      <VoltajeChart data={machineData.measurements} />
-      <CorrienteChart data={machineData.measurements} />
+      <h2>{machineData.name} - Tiempo real</h2>
+      <VoltajeChart data={chartData} />
+      <CorrienteChart data={chartData} />
     </div>
   );
 };

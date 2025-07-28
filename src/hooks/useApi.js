@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const API_KEY = "12345";
 const API_BASE_URL = "https://api-dashboard-1xb1.onrender.com/api";
+
+// const API_BASE_URL = "http://localhost:3000/api";
 const useApi = ({
   url,
   method = 'GET',

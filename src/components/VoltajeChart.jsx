@@ -16,7 +16,12 @@ const VoltageChart = ({ data }) => {
   const allVoltages = data.flatMap(d => [d.voltage_a, d.voltage_b, d.voltage_c]);
   const minV = Math.min(...allVoltages) - 10;
   const maxV = Math.max(...allVoltages) + 10;
-
+if (allVoltages.length === 0) {
+    return <p>No hay datos de voltaje disponibles.</p>;
+  }
+  else {
+    // console.log("Datos de voltaje:", data); // Para depuración
+  }
   return (
     <div style={{ marginBottom: 40 }}>
       <h3>Gráfica de Voltajes (Fase A, B y C)</h3>
